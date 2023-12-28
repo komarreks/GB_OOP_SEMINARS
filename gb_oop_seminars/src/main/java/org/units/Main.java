@@ -22,28 +22,34 @@ public class Main {
         blackCommand.forEach(unit -> {
             System.out.println(unit);
         });
+
+        whiteCommand.forEach(n -> n.printDistance(blackCommand));
     }
 
     private static List<Unit> generateCommand(int countUnits, int offset){
         List<Unit> units = new ArrayList<>();
         Random random = new Random();
 
+        int x = offset == 0? 0:9;
+        int y = 0;
+
         for (int i = 1; i<= countUnits; i++){
             int r = random.nextInt(1+offset,5+offset);
-            units.add(getUnit(r));
+            units.add(getUnit(r, x, y));
+            y++;
         }
         return units;
     }
 
-    private static Unit getUnit(int num){
+    private static Unit getUnit(int num, int x, int y){
         switch (num){
-            case 1:return new CrossBower(getName());
-            case 2:return new Monk(getName());
-            case 3:return new PikeMan(getName());
-            case 4:return new Peasant(getName());
-            case 5:return new Rogue(getName());
-            case 6:return new Sniper(getName());
-            case 7:return new Wizard(getName());
+            case 1:return new CrossBower(getName(), x, y);
+            case 2:return new Monk(getName(), x, y);
+            case 3:return new PikeMan(getName(), x, y);
+            case 4:return new Peasant(getName(), x, y);
+            case 5:return new Rogue(getName(), x, y);
+            case 6:return new Sniper(getName(), x, y);
+            case 7:return new Wizard(getName(), x, y);
         }
         return null;
     }
