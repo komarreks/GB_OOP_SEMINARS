@@ -1,7 +1,9 @@
-package org.units;
+package additional;
+
+import abstractUnits.Unit;
 
 public class Vector2 {
-    int x,y;
+    public int x,y;
 
     public Vector2(int x, int y){
         this.x = x;
@@ -11,4 +13,6 @@ public class Vector2 {
     public float rangeEnemy(Vector2 vector2){
         return  (float) Math.sqrt(Math.pow(vector2.x - x, 2)+Math.pow(vector2.y-y, 2));
     }
+
+
 }

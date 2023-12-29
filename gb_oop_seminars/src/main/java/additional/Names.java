@@ -1,4 +1,4 @@
-package org.units;
+package additional;
 
 public enum Names {
     Ваня,

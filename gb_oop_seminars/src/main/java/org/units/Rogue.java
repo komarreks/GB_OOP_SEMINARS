@@ -1,14 +1,20 @@
 package org.units;
 
-public class Rogue extends Unit{
-    public Rogue(String name, int x, int y) {
+import abstractUnits.Infantry;
+import abstractUnits.Unit;
+
+import java.util.List;
+
+public class Rogue extends Infantry {
+    public Rogue(String name, int x, int y, List<Unit> enemyes) {
         super(100,
                 100,
                 5,
                 name,
                 new int[]{20,30},
                 x,
-                y);
+                y,
+                enemyes);
     }
     @Override
     public String toString() {

@@ -1,4 +1,8 @@
-package org.units;
+package game;
+
+import additional.Names;
+import abstractUnits.Unit;
+import org.units.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
         int countUnits = 10;
-        whiteCommand.addAll(generateCommand(countUnits,0));
-        blackCommand.addAll(generateCommand(countUnits,3));
+        whiteCommand.addAll(generateCommand(countUnits,0, blackCommand));
+        blackCommand.addAll(generateCommand(countUnits,3, whiteCommand));
 
         System.out.println("Белые:");
         whiteCommand.forEach(unit -> {
@@ -26,7 +30,7 @@ public class Main {
         whiteCommand.forEach(n -> n.printDistance(blackCommand));
     }
 
-    private static List<Unit> generateCommand(int countUnits, int offset){
+    private static List<Unit> generateCommand(int countUnits, int offset, List<Unit> enemyes){
         List<Unit> units = new ArrayList<>();
         Random random = new Random();
 
@@ -35,21 +39,21 @@ public class Main {
 
         for (int i = 1; i<= countUnits; i++){
             int r = random.nextInt(1+offset,5+offset);
-            units.add(getUnit(r, x, y));
+            units.add(getUnit(r, x, y, enemyes));
             y++;
         }
         return units;
     }
 
-    private static Unit getUnit(int num, int x, int y){
+    private static Unit getUnit(int num, int x, int y, List<Unit> enemyes){
         switch (num){
-            case 1:return new CrossBower(getName(), x, y);
-            case 2:return new Monk(getName(), x, y);
-            case 3:return new PikeMan(getName(), x, y);
-            case 4:return new Peasant(getName(), x, y);
-            case 5:return new Rogue(getName(), x, y);
-            case 6:return new Sniper(getName(), x, y);
-            case 7:return new Wizard(getName(), x, y);
+            case 1:return new CrossBower(getName(), x, y, enemyes);
+            case 2:return new Monk(getName(), x, y, enemyes);
+            case 3:return new PikeMan(getName(), x, y, enemyes);
+            case 4:return new Peasant(getName(), x, y, enemyes);
+            case 5:return new Rogue(getName(), x, y, enemyes);
+            case 6:return new Sniper(getName(), x, y, enemyes);
+            case 7:return new Wizard(getName(), x, y, enemyes);
         }
         return null;
     }

@@ -1,7 +1,12 @@
 package org.units;
 
-public class Sniper extends UnitShooter{
-    public Sniper(String name, int x, int y) {
+import abstractUnits.Shooter;
+import abstractUnits.Unit;
+
+import java.util.List;
+
+public class Sniper extends Shooter {
+    public Sniper(String name, int x, int y, List<Unit> enemyes) {
         super(100,
                 100,
                 5,
@@ -11,7 +16,8 @@ public class Sniper extends UnitShooter{
                 20,
                 40,
                 x,
-                y);
+                y,
+                enemyes);
     }
     @Override
     public String toString() {
@@ -21,6 +27,7 @@ public class Sniper extends UnitShooter{
                 health + "/"+healthMax +
                 ", броня - "+armor+
                 ", остаток болтов - "+arrows +
-                ", координаты ("+position.x+"/"+position.y + ")";
+                ", координаты ("+position.x+"/"+position.y + ")"+
+                ", ближ. соперник - " + nearEnemy(enemyes);
     }
 }

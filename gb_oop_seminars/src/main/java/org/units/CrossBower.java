@@ -1,7 +1,12 @@
 package org.units;
 
-public class CrossBower extends UnitShooter{
-    public CrossBower(String name, int x, int y) {
+import abstractUnits.Shooter;
+import abstractUnits.Unit;
+
+import java.util.List;
+
+public class CrossBower extends Shooter {
+    public CrossBower(String name, int x, int y, List<Unit> enemyes) {
         super(75,
               75,
               2,
@@ -11,7 +16,8 @@ public class CrossBower extends UnitShooter{
              20,
              50,
              x,
-             y);
+             y,
+             enemyes);
     }
     @Override
     public String toString() {
@@ -21,6 +27,7 @@ public class CrossBower extends UnitShooter{
                 health + "/"+healthMax +
                 ", броня - "+armor+
                 ", остаток болтов - "+arrows +
-                ", координаты ("+position.x+"/"+position.y + ")";
+                ", координаты ("+position.x+"/"+position.y + ")"+
+                ", ближ. соперник - " + nearEnemy(enemyes);
     }
 }

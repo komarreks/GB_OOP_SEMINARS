@@ -1,14 +1,20 @@
 package org.units;
 
-public class Wizard extends Unit{
-    public Wizard(String name, int x, int y) {
+import abstractUnits.Magical;
+import abstractUnits.Unit;
+
+import java.util.List;
+
+public class Wizard extends Magical {
+    public Wizard(String name, int x, int y, List<Unit> enemyes) {
         super(100,
                 100,
                 5,
                 name,
                 new int[]{-10,-30},
                 x,
-                y);
+                y,
+                enemyes);
     }
     @Override
     public String toString() {

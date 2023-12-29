@@ -1,20 +1,24 @@
-package org.units;
+package abstractUnits;
+
+import additional.Vector2;
 
 import java.util.List;
 
 public abstract class Unit {
-    int health, healthMax, armor;
-    String name;
-    int[] damage;
-    Vector2 position;
+    public int health, healthMax, armor;
+    public String name;
+    public int[] damage;
+    public Vector2 position;
+    public List<Unit> enemyes;
 
-    public Unit(int health, int healthMax, int armor, String name, int[] damage, int x, int y) {
+    public Unit(int health, int healthMax, int armor, String name, int[] damage, int x, int y, List<Unit> enemyes) {
         this.health = health;
         this.healthMax = healthMax;
         this.armor = armor;
         this.name = name;
         this.damage = damage;
         this.position = new Vector2(x,y);
+        this.enemyes = enemyes;
     }
 
     @Override
