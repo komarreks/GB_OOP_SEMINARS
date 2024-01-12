@@ -7,7 +7,8 @@ import java.util.List;
 
 public class Wizard extends Magical {
     public Wizard(String name, int x, int y, List<Unit> enemyes) {
-        super(100,
+        super("Колдун ",
+                100,
                 100,
                 5,
                 name,
@@ -15,13 +16,5 @@ public class Wizard extends Magical {
                 x,
                 y,
                 enemyes);
-    }
-    @Override
-    public String toString() {
-        return "Колдун " +
-                name +
-                ", здоровье - " + health + "/"+healthMax +
-                ", броня - "+armor +
-                ", координаты ("+position.x+"/"+position.y + ")";
     }
 }

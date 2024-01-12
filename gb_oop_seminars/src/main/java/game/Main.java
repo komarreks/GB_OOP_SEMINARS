@@ -5,6 +5,7 @@ import abstractUnits.Unit;
 import org.units.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +18,9 @@ public class Main {
         whiteCommand.addAll(generateCommand(countUnits,0, blackCommand));
         blackCommand.addAll(generateCommand(countUnits,3, whiteCommand));
 
+        whiteCommand.sort((u1,u2) -> Integer.compare(u2.initiative,u1.initiative));
+        blackCommand.sort((u1,u2) -> Integer.compare(u2.initiative,u1.initiative));
+
         System.out.println("Белые:");
         whiteCommand.forEach(unit -> {
             System.out.println(unit);
@@ -26,8 +30,6 @@ public class Main {
         blackCommand.forEach(unit -> {
             System.out.println(unit);
         });
-
-        whiteCommand.forEach(n -> n.printDistance(blackCommand));
     }
 
     private static List<Unit> generateCommand(int countUnits, int offset, List<Unit> enemyes){

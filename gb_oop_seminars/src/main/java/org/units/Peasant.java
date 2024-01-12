@@ -6,7 +6,8 @@ import java.util.List;
 
 public class Peasant extends Unit {
     public Peasant(String name, int x, int y, List<Unit> enemyes) {
-        super(100,
+        super("Крестьянин ",
+                100,
                 100,
                 0,
                 name,
@@ -17,10 +18,15 @@ public class Peasant extends Unit {
     }
     @Override
     public String toString() {
-        return "Крестьянин " +
+        return unitName + " " +
                 name +
                 ", здоровье - " + health + "/"+healthMax +
                 ", броня - "+armor +
                 ", координаты ("+position.x+"/"+position.y + ")";
+    }
+
+    @Override
+    public void step() {
+
     }
 }

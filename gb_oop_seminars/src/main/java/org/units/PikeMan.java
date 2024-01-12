@@ -7,7 +7,8 @@ import java.util.List;
 
 public class PikeMan extends Infantry {
     public PikeMan(String name, int x, int y, List<Unit> enemyes) {
-        super(100,
+        super("Копейщик ",
+                100,
                 100,
                 5,
                 name,
@@ -16,12 +17,5 @@ public class PikeMan extends Infantry {
                 y,
                 enemyes);
     }
-    @Override
-    public String toString() {
-        return "Копейщик " +
-                name +
-                ", здоровье - " + health + "/"+healthMax +
-                ", броня - " + armor +
-                ", координаты ("+position.x+"/"+position.y + ")";
-    }
+
 }
