@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Wizard extends Magical {
     public Wizard(String name, int x, int y, List<Unit> enemyes) {
-        super("Колдун ",
+        super("Колдун",
                 100,
                 100,
                 5,

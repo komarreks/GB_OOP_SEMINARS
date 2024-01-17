@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Monk extends Magical {
     public Monk(String name, int x, int y, List<Unit> enemyes) {
-        super("Монах ",
+        super("Монах",
                 50,
                 50,
                 1,

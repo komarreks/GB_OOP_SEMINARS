@@ -4,15 +4,15 @@ import additional.Names;
 import abstractUnits.Unit;
 import org.units.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
     static List<Unit> whiteCommand = new ArrayList<>();
     static List<Unit> blackCommand = new ArrayList<>();
 
+    static int whiteStep = 0;
+    static int blackStep = 0;
+    static boolean whiteAlive = true, blackAlive = true;
     public static void main(String[] args) {
         int countUnits = 10;
         whiteCommand.addAll(generateCommand(countUnits,0, blackCommand));
@@ -24,12 +24,84 @@ public class Main {
         System.out.println("Белые:");
         whiteCommand.forEach(unit -> {
             System.out.println(unit);
+            unit.setAllies(whiteCommand);
         });
         System.out.println("\n");
         System.out.println("Черные:");
         blackCommand.forEach(unit -> {
             System.out.println(unit);
+            unit.setAllies(blackCommand);
         });
+
+        int stepCount = 1;
+
+        while (whiteAlive && blackAlive){
+
+            System.out.println("Ход: " + stepCount);
+
+            if (stepCount%10==0){
+                String none = new Scanner(System.in).nextLine();
+            }
+
+            whiteCommandStep();
+            blackCommandStep();
+
+            stepCount++;
+        }
+
+        if (whiteAlive){
+            System.out.printf("Белые победили!\nВживых остались:\n");
+            whiteCommand.forEach(unit -> {
+                if (unit.health>0){
+                    System.out.printf(unit.getCastName());
+                }
+            });
+        }else {
+            System.out.printf("Черные победили!\nВживых остались:\n");
+            blackCommand.forEach(unit -> {
+                if (unit.health>0){
+                    System.out.printf(unit.getCastName());
+                }
+            });
+        }
+    }
+
+    private static void whiteCommandStep(){
+        int countLiveUnits = countAliveUnits(whiteCommand);
+
+        whiteAlive = countLiveUnits > 0;
+
+        if (whiteStep >= countLiveUnits && whiteAlive){whiteStep = 0;}
+
+        if (whiteAlive){
+            whiteCommand.get(whiteStep).step();
+            whiteStep++;
+        }
+    }
+
+    private static void blackCommandStep(){
+        int countLiveUnits = countAliveUnits(blackCommand);
+
+        blackAlive = countLiveUnits > 0;
+
+        if (blackStep >= countLiveUnits && blackAlive){blackStep = 0;}
+
+        if (blackAlive){
+            blackCommand.get(blackStep).step();
+            blackStep++;
+        }
+    }
+
+    private static int countAliveUnits(List<Unit> command){
+        int count = 0;
+
+        for (Unit unit:command){
+            if (unit.health>0){
+                count++;
+            }
+        }
+
+        return count;
     }
 
     private static List<Unit> generateCommand(int countUnits, int offset, List<Unit> enemyes){

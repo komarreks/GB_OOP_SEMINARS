@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PikeMan extends Infantry {
     public PikeMan(String name, int x, int y, List<Unit> enemyes) {
-        super("Копейщик ",
+        super("Копейщик",
                 100,
                 100,
                 5,

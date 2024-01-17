@@ -27,17 +27,6 @@ public abstract class Shooter extends Unit{
         initiative = 3;
     }
 
-    public Unit nearEnemy(List<Unit> enemyes){
-        HashMap<Float, Unit> unitMap = new HashMap<>();
-
-        enemyes.forEach(enemy ->{
-            if (enemy.health>0){
-                unitMap.put(position.rangeEnemy(enemy.position),enemy);
-            }
-        });
-
-        return unitMap.entrySet().stream().findFirst().get().getValue();
-    }
     @Override
     public String toString() {
         return unitName + " "+
@@ -55,22 +44,15 @@ public abstract class Shooter extends Unit{
         if(health>0 && arrows>0){
             Unit enemy = nearEnemy(enemyes);
 
-            int dodge = 0;
-            float distance = enemyDistance(enemy);
-            int maxDamage = (int) distance > rangeMaxDamage ? damage[0] : damage[1];
-
-            if(enemy.isDodging){
-                dodge = enemy.dodging((int) distance);
-                maxDamage = (int) (maxDamage/(dodge*distance));
-            }
-
-            maxDamage = maxDamage - enemy.armor;
-
-            maxDamage = maxDamage>0?maxDamage:0;
+            int maxDamage = getMaxDamage(rangeMaxDamage);
 
             enemy.health = enemy.health - maxDamage;
 
             arrows--;
+
+            System.out.println(getCastName() + ": выстрелил в " + enemy.getCastName("а "));
+        } else if (arrows == 0) {
+            System.out.println(getCastName() + ": я без стрел, товарищи!");
         }
     }
 }

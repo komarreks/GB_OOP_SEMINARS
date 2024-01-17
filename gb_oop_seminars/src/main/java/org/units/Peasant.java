@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Peasant extends Unit {
     public Peasant(String name, int x, int y, List<Unit> enemyes) {
-        super("Крестьянин ",
+        super("Крестьянин",
                 100,
                 100,
                 0,

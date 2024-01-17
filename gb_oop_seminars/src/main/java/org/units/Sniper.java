@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Sniper extends Shooter {
     public Sniper(String name, int x, int y, List<Unit> enemyes) {
-        super("Снайпер ",
+        super("Снайпер",
                 100,
                 100,
                 5,
