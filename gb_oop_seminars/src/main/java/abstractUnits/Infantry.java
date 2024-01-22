@@ -1,5 +1,7 @@
 package abstractUnits;
 
+import game.Main;
+
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -19,8 +21,8 @@ public abstract class Infantry extends Unit{
     }
 
     public boolean canMoveToCoord(int x, int y){
-        for (Unit unit : allies){
-            if (x == unit.position.x && y == unit.position.y){
+        for (Unit unit : Main.allTeam){
+            if (x == unit.position.x && y == unit.position.y && unit.health>0){
                 return false;
             }
         }
@@ -52,7 +54,12 @@ public abstract class Infantry extends Unit{
     @Override
     public void step() {
         if (health>0){
-            Unit enemy = nearEnemy(enemyes);
+            Unit enemy = nearEnemy();
+
+            if (enemy == null){
+                return;
+            }
+
             int ex = enemy.position.x;
             int ey = enemy.position.y;
 
@@ -74,9 +81,9 @@ public abstract class Infantry extends Unit{
                 boolean moveToY = diffY < diffX && diffY > 1;
 
                 if (moveToY){
-                    preterY = preterY + ey > position.y ? 1:-1;
+                    preterY = preterY + (ey >= position.y ? 1:-1);
                 }else {
-                    preterX = preterX + ex > position.x ? 1:-1;
+                    preterX = preterX + (ex >= position.x ? 1:-1);
                 }
 
                 if (canMoveToCoord(preterX,preterY)){

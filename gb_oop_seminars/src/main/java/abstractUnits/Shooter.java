@@ -35,14 +35,13 @@ public abstract class Shooter extends Unit{
                 health + "/"+healthMax +
                 ", броня - "+armor+
                 ", остаток болтов - "+arrows +
-                ", координаты ("+position.x+"/"+position.y + ")"+
-                ", ближ. соперник - " + nearEnemy(enemyes);
+                ", координаты ("+position.x+"/"+position.y;
     }
 
     @Override
     public void step() {
         if(health>0 && arrows>0){
-            Unit enemy = nearEnemy(enemyes);
+            Unit enemy = nearEnemy();
 
             int maxDamage = getMaxDamage(rangeMaxDamage);
 

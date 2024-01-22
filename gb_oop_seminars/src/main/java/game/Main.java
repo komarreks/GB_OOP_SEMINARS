@@ -7,8 +7,9 @@ import org.units.*;
 import java.util.*;
 
 public class Main {
-    static List<Unit> whiteCommand = new ArrayList<>();
-    static List<Unit> blackCommand = new ArrayList<>();
+    public static List<Unit> whiteCommand = new ArrayList<>();
+    public static List<Unit> blackCommand = new ArrayList<>();
+    public static List<Unit> allTeam = new ArrayList<>();
 
     static int whiteStep = 0;
     static int blackStep = 0;
@@ -20,6 +21,11 @@ public class Main {
 
         whiteCommand.sort((u1,u2) -> Integer.compare(u2.initiative,u1.initiative));
         blackCommand.sort((u1,u2) -> Integer.compare(u2.initiative,u1.initiative));
+
+        allTeam.addAll(whiteCommand);
+        allTeam.addAll(blackCommand);
+
+        allTeam.sort((u1,u2) -> Integer.compare(u2.initiative, u1.initiative));
 
         System.out.println("Белые:");
         whiteCommand.forEach(unit -> {
@@ -33,36 +39,27 @@ public class Main {
             unit.setAllies(blackCommand);
         });
 
-        int stepCount = 1;
+        Scanner scanner = new Scanner(System.in);
 
-        while (whiteAlive && blackAlive){
+        while (true){
 
-            System.out.println("Ход: " + stepCount);
 
-            if (stepCount%10==0){
-                String none = new Scanner(System.in).nextLine();
+            if (whiteDead()){
+                System.out.println("Черные победили");
+                break;
             }
 
-            whiteCommandStep();
-            blackCommandStep();
+            if (blackDead()){
+                System.out.println("Белые победили");
+                break;
+            }
 
-            stepCount++;
-        }
+            for (Unit unit : allTeam){
+                unit.step();
+            }
 
-        if (whiteAlive){
-            System.out.printf("Белые победили!\nВживых остались:\n");
-            whiteCommand.forEach(unit -> {
-                if (unit.health>0){
-                    System.out.printf(unit.getCastName());
-                }
-            });
-        }else {
-            System.out.printf("Черные победили!\nВживых остались:\n");
-            blackCommand.forEach(unit -> {
-                if (unit.health>0){
-                    System.out.printf(unit.getCastName());
-                }
-            });
+            View.view();
+            scanner.nextLine();
         }
     }
 
@@ -108,8 +105,8 @@ public class Main {
         List<Unit> units = new ArrayList<>();
         Random random = new Random();
 
-        int x = offset == 0? 0:9;
-        int y = 0;
+        int x = offset == 0? 1:10;
+        int y = 1;
 
         for (int i = 1; i<= countUnits; i++){
             int r = random.nextInt(1+offset,5+offset);
@@ -134,5 +131,20 @@ public class Main {
 
     private static String getName(){
         return Names.values()[new Random().nextInt(1,Names.values().length-1)].name();
+    }
+
+    public static boolean whiteDead(){
+        for (Unit unit : whiteCommand) {
+            if (unit.health>0) return false;
+        }
+        return true;
+    }
+
+    public static boolean blackDead(){
+        for (Unit unit : blackCommand) {
+            if (unit.health>0) return false;
+        }
+
+        return true;
     }
 }

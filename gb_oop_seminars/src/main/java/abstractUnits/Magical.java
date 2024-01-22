@@ -19,6 +19,6 @@ public abstract class Magical extends Unit{
 
     @Override
     public void step() {
-
+        System.out.println(getCastName() + ": стоит и смотрит");
     }
 }

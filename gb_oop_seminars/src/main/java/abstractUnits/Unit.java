@@ -50,7 +50,7 @@ public abstract class Unit implements UnitsAction {
         return getUnitName() + " " + getName();
     }
 
-    public Unit nearEnemy(List<Unit> enemyes){
+    public Unit nearEnemy(){
         HashMap<Float, Unit> unitMap = new HashMap<>();
 
         enemyes.forEach(enemy ->{
@@ -58,6 +58,8 @@ public abstract class Unit implements UnitsAction {
                 unitMap.put(position.rangeEnemy(enemy.position),enemy);
             }
         });
+
+        if (unitMap.isEmpty()){return null;}
 
         return unitMap.entrySet().stream().findFirst().get().getValue();
     }
@@ -85,7 +87,7 @@ public abstract class Unit implements UnitsAction {
     }
 
     public int getMaxDamage(int rangeMaxDamage){
-        Unit enemy = nearEnemy(enemyes);
+        Unit enemy = nearEnemy();
 
         int dodge = 0;
         float distance = enemyDistance(enemy);
@@ -102,5 +104,13 @@ public abstract class Unit implements UnitsAction {
 
         return maxDamage;
     }
-
+    public int[] getCoords(){
+        return new int[]{position.x, position.y};
+    }
+    public int getHp(){
+        return health;
+    }
+    public String getInfo(){
+        return unitName;
+    };
 }
