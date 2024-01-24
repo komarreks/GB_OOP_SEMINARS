@@ -5,6 +5,7 @@ import abstractUnits.Unit;
 import java.util.List;
 
 public class Peasant extends Unit {
+    public boolean isReady;
     public Peasant(String name, int x, int y, List<Unit> enemyes) {
         super("Деревещина",
                 100,
@@ -15,6 +16,7 @@ public class Peasant extends Unit {
                 x,
                 y,
                 enemyes);
+        isReady = true;
     }
     @Override
     public String toString() {
@@ -27,6 +29,7 @@ public class Peasant extends Unit {
 
     @Override
     public void step() {
-        System.out.println(getCastName() + ": позорно прячется");
+        isReady = true;
+        System.out.println(getCastName() + ": снова готов");
     }
 }
