@@ -13,9 +13,13 @@ public abstract class Infantry extends Unit{
     }
     @Override
     public String toString() {
+
+        String localHealth = health + "/"+healthMax;
+        if (health <=0){localHealth = "умер";}
+
         return unitName + " " +
                 name +
-                ", здоровье - " + health + "/"+healthMax +
+                ", здоровье - " + localHealth +
                 ", броня - " + armor +
                 ", координаты ("+position.x+"/"+position.y + ")";
     }

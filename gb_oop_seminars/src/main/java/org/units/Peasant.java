@@ -20,9 +20,13 @@ public class Peasant extends Unit {
     }
     @Override
     public String toString() {
+
+        String localHealth = health + "/"+healthMax;
+        if (health <=0){localHealth = "умер";}
+
         return unitName + " " +
                 name +
-                ", здоровье - " + health + "/"+healthMax +
+                ", здоровье - " + localHealth +
                 ", броня - "+armor +
                 ", координаты ("+position.x+"/"+position.y + ")";
     }
@@ -31,5 +35,10 @@ public class Peasant extends Unit {
     public void step() {
         isReady = true;
         System.out.println(getCastName() + ": снова готов");
+    }
+
+    @Override
+    public String getCastName(String add) {
+        return "Деревещин" + add + getName();
     }
 }

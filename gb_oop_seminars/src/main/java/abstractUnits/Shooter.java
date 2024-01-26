@@ -31,10 +31,14 @@ public abstract class Shooter extends Unit{
 
     @Override
     public String toString() {
+
+        String localHealth = health + "/"+healthMax;
+        if (health <=0){localHealth = "умер";}
+
         return unitName + " "+
                 name +
                 ", здоровье - " +
-                health + "/"+healthMax +
+                localHealth +
                 ", броня - "+armor+
                 ", остаток болтов - "+arrows +
                 ", координаты ("+position.x+"/"+position.y;
